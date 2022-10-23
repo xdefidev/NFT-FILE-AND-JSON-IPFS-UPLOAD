@@ -11,10 +11,19 @@ import Body from "../connectwallet/connectwallet";
 const jsonlint = require("jsonlint-mod");
 window.jsonlint = jsonlint;
 const ipfsClient = require("ipfs-http-client");
+
+const projectId = '---Enter projectID from infura.io project---';
+const projectSecret = '---Enter project secrate key from infura.io project---';
+const auth =
+'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
 const ipfs = ipfsClient({
   host: "ipfs.infura.io",
   port: 5001,
-  protocol: "https"
+  protocol: "https",
+  headers: {
+    authorization: auth,
+  },
+
 });
 
 export default class UploadToIPFS extends Component {
